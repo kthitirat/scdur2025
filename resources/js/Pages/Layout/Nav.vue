@@ -24,45 +24,35 @@
       </div>
     </div>
 
-        <!-- แถวนำทาง -->
+    <!-- แถวนำทาง -->
     <nav class="w-full bg-[#A54734] overflow-visible">
-    <div class="container mx-auto max-w-7xl px-4 md:px-8 lg:px-32 h-12 md:h-16 flex items-center gap-4 md:gap-8">
-        <Link :href="route('index')" class="text-white text-xs md:text-sm lg:text-base hover:text-gray-200 whitespace-nowrap">หน้าหลัก</Link>
-        <Link href="#" class="text-white text-xs md:text-sm lg:text-base hover:text-gray-200 whitespace-nowrap">เกี่ยวกับหน่วยงาน</Link>
+    <div class="container mx-auto max-w-7xl px-4 md:px-8 lg:px-32
+                h-12 md:h-16 flex items-stretch gap-2 md:gap-4">
 
-        <!-- Dropdown -->
-        <div class="relative pt-2" @mouseenter="open = true" @mouseleave="scheduleClose()">
-        <button
-            type="button"
-            class="text-white text-xs md:text-sm lg:text-base hover:text-gray-200 whitespace-nowrap inline-flex items-center"
-            :aria-expanded="open ? 'true' : 'false'"
-            @click="open = !open">
+        <!-- คลาสเดียวสำหรับทุกลิงก์ -->
+        <Link :href="route('index')" :class="navLink">หน้าหลัก</Link>
+        <Link href="#" :class="navLink">เกี่ยวกับหน่วยงาน</Link>
+
+        <!-- Dropdown: เอา pt-2 ออก, ใช้คลาสเดียวกับลิงก์ -->
+        <div class="relative" @mouseenter="open = true" @mouseleave="open = false">
+        <button type="button" :class="navLink + ' gap-1' " @click="open = !open">
             SCDUR 2023
-            <svg class="h-4 w-4 inline-block ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="h-4 w-4 -mt-px align-middle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
         </button>
 
-        <!-- กล่องเมนู: ไม่มี mt-2, ใช้ transition + z สูง -->
-        <div
-            class="absolute left-0 top-full w-56 bg-[#A54734] text-white rounded-md shadow-lg py-2 z-[70]
-                transition ease-out duration-150"
-            :class="open ? 'opacity-100 translate-y-0 pointer-events-auto visible' : 'opacity-0 -translate-y-1 pointer-events-none invisible'">
+        <div v-show="open"
+            class="absolute left-0 top-full w-56 bg-[#A54734] text-white rounded-md shadow-lg py-2 z-[70]">
             <a href="#" class="block px-4 py-2 hover:bg-[#8D3B2C]">ประวัติ</a>
             <a href="#" class="block px-4 py-2 hover:bg-[#8D3B2C]">เกณฑ์การประเมิน</a>
             <a href="#" class="block px-4 py-2 hover:bg-[#8D3B2C]">ผู้เข้าร่วม</a>
         </div>
         </div>
 
-        <Link href="#" class="text-white text-xs md:text-sm lg:text-base hover:text-gray-200 whitespace-nowrap">
-        รายงานผล SCDUR2024
-        </Link>
-        <a href="https://example.com/announcements.pdf" target="_blank" class="text-white text-xs md:text-sm lg:text-base hover:text-gray-200 whitespace-nowrap">
-        ประกาศที่เกี่ยวข้อง
-        </a>
-        <Link href="#" class="text-white text-xs md:text-sm lg:text-base hover:text-gray-200 whitespace-nowrap">
-        ติดต่อเรา
-        </Link>
+        <Link href="#" :class="navLink">รายงานผล SCDUR2024</Link>
+        <a href="https://example.com/announcements.pdf" target="_blank" :class="navLink">ประกาศที่เกี่ยวข้อง</a>
+        <Link href="#" :class="navLink">ติดต่อเรา</Link>
     </div>
     </nav>
   </header>
@@ -77,9 +67,11 @@ export default {
   components: { Link },
   data() {
     return {
-        isMenuOpen: false,
-        open: false, 
-        closeTimer: null
+        open: false,
+    navLink:
+      'inline-flex items-center h-full px-3 md:px-4 ' +
+      'text-white text-xs md:text-sm lg:text-base font-medium ' +
+      'hover:text-gray-200 whitespace-nowrap tracking-normal'
     };
   },
   methods: {
