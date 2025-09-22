@@ -1,9 +1,9 @@
 <template>
-  <div class="bg-white min-h-screen">
+  <div class="min-h-screen">
     <Nav />
     <section id="content"
              class="text-gray-800 z-0 px-4 md:px-8 lg:px-10 xl:px-16 min-h-screen
-                    pt-[190px] md:pt-[220px] lg:pt-[240px]">
+                    pt-[60px] md:pt-[220px] lg:pt-[240px]">
       <main>
         <slot></slot>
       </main>
@@ -22,4 +22,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

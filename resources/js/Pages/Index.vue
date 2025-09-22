@@ -1,18 +1,30 @@
 <template>
-  <Layout>
-    <div class="p-4">
-      <h1 class="text-3xl font-bold text-center">ยินดีต้อนรับสู่หน้าหลัก</h1>
+ <Layout>
+    <div class="mx-auto max-w-7xl px-4 pt-0 pb-4">
+      <!-- มือถือ: ดันสไลด์ให้กว้างเท่าหน้าจอ, เดสก์ท็อปยังอยู่ใน max-w -->
+      <div class="relative w-screen left-1/2 -ml-[50vw] sm:w-auto sm:left-auto sm:ml-0">
+        <HeroSlider :slides="slides" :intervalMs="5500" />
+      </div>
+
     </div>
   </Layout>
 </template>
 
 <script>
 import Layout from "@/Pages/Layout/Layout.vue";
-import { Link, router } from "@inertiajs/vue3";
-import axios from "axios";
+import HeroSlider from "@/Components/HeroSlider.vue";
 
 export default {
   name: "Index",
-  components: { Layout, Link },
+  components: { Layout, HeroSlider },
+  data() {
+    return {
+      slides: [
+        {
+          image: "/images/1.png",         
+        },
+      ],
+    };
+  },
 };
 </script>
